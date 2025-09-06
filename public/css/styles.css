@@ -3,4 +3,225 @@
 *:before,
 *:after {
   box-sizing: border-box;
+  margin: 0;
+}
+ body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#wrapper {
+  padding: 0.5rem;
+}
+
+/* ===================== 
+Header
+=================== */
+
+
+#top-header{
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  
+}
+
+.siteName {
+  font-family:'Lucida Sans', 'Lucida Sans Regular';
+  
+}
+header a {
+  text-decoration: none;
+  color: black;
+}
+
+.siteName a {
+  font-size: 2rem;
+}
+
+/* ==============
+Navigation
+================ */
+
+nav{
+  background-color: #336699;  
+}
+
+nav ul {
+  display: flex;
+  justify-content:space-evenly;
+  align-items: center;
+  padding: 1rem;
+}
+nav ul li {
+  list-style: none;
+  color: white;
+}
+
+/* ===============
+Hero
+================== */
+main {
+  border: 1px solid black; 
+}
+.hero {
+  padding-top: 1rem;
+  border: 1px solid blue;
+  position: relative;
+}
+
+.hero h1 {
+  margin-bottom:1rem;
+}
+.hero-img {
+  width: 100%;
+  height: auto;
+  max-width: 325px; 
+  display: block;
+  margin: 0 auto; 
+}
+.float-card { 
+  position: absolute; 
+  top: 65px;
+  background: rgba(134, 187, 216, 0.8); 
+  font-size:.75rem ;
+  max-width: 200px;
+  min-height: 100px;
+  padding: .35rem;
+  padding-top: .25rem;
+  font-weight: bolder;
+}
+.float-card p {
+  padding:3px;
+}
+
+.float-card a {
+  display: inline-block;
+  padding: .5rem .75rem;
+  background:#336699;
+  color: white;
+  text-decoration: none;
+}
+/* =================
+List
+====================*/
+.list {
+  padding: 1rem 0 1rem 0; 
+}
+
+.list ul {
+  margin-top: 1rem;
+}
+.list ul li {
+  padding: .5rem;
+  font-size: .85rem;
+}
+/* ===========
+Grid
+============== */
+.upgrades h3{
+  padding-bottom: .75rem;
+}
+
+.upgrades-grid {  
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 1rem; 
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.upgrades-grid li { 
+  text-align: center;
+}
+
+.image-box {
+   background-color: #86BBD8;
+   min-height: 82px;
+}
+.upgrades-grid img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* =========== 
+Footer
+===============*/
+footer {
+  padding: 1rem;
+}
+
+@media only screen and (min-width: 1158px) {
+  body {
+    background-image: url("../images/site/checkerboard.jpg");
+    background-repeat: repeat;
+    background-size: auto;
+  }
+
+  #wrapper {
+    background-color: white;
+    border: 5px solid #86BBD8;
+    border-radius: 5px;
+    margin: 0 auto;
+    max-width: 900px;
+  }
+  .hero-img {  
+   max-width: 600px;  
+  }
+
+  .float-card { 
+    position: absolute; 
+    top: 135px;
+    left: 75px;
+    background: rgba(134, 187, 216, 0.8); 
+    font-size: 1rem;
+    
+    min-height: 100px;
+    padding: .35rem;
+    padding-top: .25rem;
+    font-weight: bolder;
+  }
+
+  .float-card a {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: .75rem 2.5rem;
+    background:#336699;
+    color: white;
+    text-decoration: none;
+    font-size: .85rem;
+  }
+  .content {
+    display: flex;      
+  }
+  .content section {
+    padding: .5rem;
+    margin: .5rem;
+    flex:1
+  }
+  .grid {
+    order: 1;
+  }
+  .list {   
+    order: 2;    
+  }
+
+  .list h3 {
+    margin-top: .25rem;
+  }
+
+  .list ul {
+    padding-left: 0;
+  }
+
+  .list ul li {
+    padding: .5rem 0;
+    font-size: 1rem;
+  }
+ 
 }
