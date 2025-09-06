@@ -18,8 +18,7 @@ Header
 =================== */
 
 
-#top-header{
-  border: 1px solid red;
+#top-header{  
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -62,12 +61,8 @@ nav ul li {
 /* ===============
 Hero
 ================== */
-main {
-  border: 1px solid black; 
-}
 .hero {
-  padding-top: 1rem;
-  border: 1px solid blue;
+  padding-top: 1rem; 
   position: relative;
 }
 
@@ -156,7 +151,7 @@ footer {
   padding: 1rem;
 }
 
-@media only screen and (min-width: 1158px) {
+@media only screen and (min-width: 565px) {
   body {
     background-image: url("../images/site/checkerboard.jpg");
     background-repeat: repeat;
