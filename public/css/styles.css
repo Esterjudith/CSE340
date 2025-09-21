@@ -53,10 +53,14 @@ nav ul {
   align-items: center;
   padding: 1rem;
 }
-nav ul li {
-  list-style: none;
-  color: white;
+.navColor li {
+  list-style: none; 
 }
+.navColor li a {
+  color: white;
+  text-decoration: none;
+}
+
 
 /* ===============
 Hero
@@ -144,6 +148,72 @@ Grid
   margin: 0 auto;
 }
 
+/* ==========================
+Inventory classification Page
+============================= */
+.classification-title {  
+  margin: 1rem 0;
+}
+#inv-display li {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 1rem;
+ }
+  #inv-display a img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    
+  }
+  #inv-display li a {
+    text-decoration: none;
+    color: #333;
+    padding: 0.5rem;
+  }
+  .namePrice {
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.namePrice hr {
+  margin: 0.5rem 0;
+}
+
+.namePrice h2 {
+  margin: 0.25rem 0;
+  font-size: 1.2rem;
+}
+
+.namePrice span {
+  color: #336699;
+  font-weight: bold;
+  font-size: 1rem;
+}
+#inv-display li a:hover {
+  color: #02b0d3;
+}
+
+
+/* ==================
+Inventory Detail Page
+===================== */
+.vehicle-detail-wrapper {
+  flex-direction: column;
+  align-items: center;
+}
+
+.vehicle-image, .vehicle-info {
+  width: 100%;
+}
+
+.vehicle-info p {
+  margin-top: 1rem;
+}
+
 /* =========== 
 Footer
 ===============*/
@@ -217,6 +287,42 @@ footer {
   .list ul li {
     padding: .5rem 0;
     font-size: 1rem;
+  }
+  #inv-display {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: auto 0;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;  
+  }
+  
+  .vehicle-detail-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items:flex-start;
+    justify-content: center;
+    max-width: 1000px;
+    margin: auto;
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+  .vehicle-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  
+  .vehicle-image {
+    flex: 1 1 40%;
+    min-width: 280px;
+  }
+
+  .vehicle-info {
+    flex: 1 1 50%;
+    min-width: 280px;
   }
  
 }
