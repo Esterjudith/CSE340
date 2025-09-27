@@ -35,7 +35,7 @@ invCont.buildDetailView = async function (req, res, next) {
   res.render("./inventory/detailInventory", {
     title: `${year} ${make} ${model}`,
     nav, 
-    grid
+    grid,
   })
 }
 
