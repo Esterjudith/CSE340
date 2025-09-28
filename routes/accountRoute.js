@@ -6,7 +6,8 @@ const regValidate = require('../utilities/account-validation.js')
 
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
-//Process the registration data
+
+//Process the registration data: goes through validation and then error handleling
 router.post(
   "/register",
   regValidate.registrationRules(),

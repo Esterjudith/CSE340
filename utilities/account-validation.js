@@ -1,6 +1,7 @@
 const utilities = require(".")
-  const { body, validationResult } = require("express-validator")
-  const validate = {}
+const { body, validationResult } = require("express-validator")
+const accountModel = require("../models/account-model")
+const validate = {}
 
   /*  **********************************
   *  Registration Data Validation Rules
@@ -10,32 +11,33 @@ const utilities = require(".")
       // firstname is required and must be string
       body("account_firstname")
         .trim()
-        .escape()
-        .notEmpty()
+        .escape()   
         .isLength({ min: 1 })
         .withMessage("Please provide a first name."), // on error this message is sent.
   
       // lastname is required and must be string
       body("account_lastname")
         .trim()
-        .escape()
-        .notEmpty()
+        .escape()  
         .isLength({ min: 2 })
         .withMessage("Please provide a last name."), // on error this message is sent.
   
       // valid email is required and cannot already exist in the DB
       body("account_email")
-      .trim()
-      .escape()
-      .notEmpty()
+      .trim()      
       .isEmail()
-      .normalizeEmail() // refer to validator.js docs
-      .withMessage("A valid email is required."),
+      .normalizeEmail() 
+      .withMessage("A valid email is required.")
+      .custom(async (account_email) => {
+        const emailExists = await accountModel.checkExistingEmail(account_email)
+        if (emailExists){
+          throw new Error("Email exists. Please log in or use different email")
+        }
+      }),
   
       // password is required and must be strong password
       body("account_password")
-        .trim()
-        .notEmpty()
+        .trim()       
         .isStrongPassword({
           minLength: 12,
           minLowercase: 1,
@@ -51,6 +53,8 @@ const utilities = require(".")
  * Check data and return errors or continue to registration
  * ***************************** */
 validate.checkRegData = async (req, res, next) => {
+  console.log("req.body:", req.body) 
+  console.log("req.body type:", typeof req.body)
   const { account_firstname, account_lastname, account_email } = req.body
   let errors = validationResult(req) 
   if (!errors.isEmpty()) {

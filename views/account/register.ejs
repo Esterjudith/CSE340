@@ -18,13 +18,13 @@
     <p class="form-header">All fields are required</p>
   <form action="/account/register" method="post" class="auth-form">
     <label for="firstname">First name</label>
-    <input type="text" id="firstname" name="account_firstname" required>
+    <input type="text" id="firstname" name="account_firstname" required value="<%= locals.account_firstname %>">
 
     <label for="lastname">Last name</label>
-    <input type="text" id="lastname" name="account_lastname" required>
+    <input type="text" id="lastname" name="account_lastname" required value="<%= locals.account_lastname %>">
 
     <label for="email">Email address</label>
-    <input type="email" id="email" name="account_email" required>
+    <input type="email" id="email" name="account_email" required value="<%= locals.account_email %>">
 
     <label for="password">Password</label>
     <input type="password" id="password" name="account_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required>

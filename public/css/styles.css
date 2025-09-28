@@ -218,6 +218,7 @@ Inventory Detail Page
 Account login Page
 ===================== */
 .notice {
+  margin-top: 2rem;
   color: red;
   font-weight: 700;
 }
@@ -315,9 +316,21 @@ Sign up (registration) page
   display: flex;
   flex-direction: column;
 }
+.auth-form select {
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #000;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #fff;
+  appearance: none;             
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
 
 .auth-form label {
-  margin-bottom: 0.25rem;
+  margin: 0.25rem;
   font-weight: 600;
   color: #171717;
 }
@@ -329,12 +342,23 @@ Sign up (registration) page
   border-radius: 6px;
   font-size: 1rem;
 }
+.auth-form textarea {
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #000;
+  border-radius: 6px;
+  font-size: 1rem;
+  resize: vertical;  
+  min-height: 100px;  
+  font-family: inherit; 
+}
 
 .auth-form button {
-  background-color: #007bff;
+  background-color: #2e5b8a;
   color: white;
   padding: 0.75rem;
   font-weight: 600;
+  font-size: 1rem;
   border: none;
   border-radius: 30px;
   cursor: pointer;
