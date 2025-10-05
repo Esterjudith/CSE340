@@ -323,9 +323,10 @@ Sign up (registration) page
   border-radius: 6px;
   font-size: 1rem;
   background-color: #fff;
-  appearance: none;             
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none; 
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='%23333' d='M0 2l4 4 4-4z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
   cursor: pointer;
 }
 
@@ -376,13 +377,97 @@ Sign up (registration) page
   margin-bottom: 1.5rem;
 }
 
-.inv-link {
+/* .inv-link {
  font-size: 1.2rem;
  margin: 1rem;
  padding: 0.5rem;
  color: #000;
  font-weight: 600;
+} */
+
+/* ====================== 
+Inventory Management Page
+=========================*/
+/* --- Links --- */
+.inv-link {
+  margin: 2rem;
 }
+
+.inv-link a {
+  background-color: #2e5b8a;
+  color: white;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.inv-link a:hover {
+  background-color: #0056b3;
+}
+
+
+#classification_id {
+  display: block;
+  margin: 1.5rem 0 1.5rem 2rem;
+  padding: 0.5rem 2rem 0.5rem 1rem; 
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  width: 280px;
+  cursor: pointer;
+  appearance: none; 
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='%23333' d='M0 2l4 4 4-4z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 0.65rem;
+}
+
+#classification_id:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* --- Inventory Table --- */
+#inventoryDisplay {
+  margin: 2rem auto;
+  border-collapse: collapse;
+  width: 90%;
+  max-width: 900px;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#inventoryDisplay thead {
+  background-color: #2e5b8a;
+  color: white;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#inventoryDisplay tr:hover {
+  background-color: #f1f5ff;
+  color: black
+}
+
+#inventoryDisplay a {
+  color: #2e5b8a;
+  text-decoration: none;
+}
+
+#inventoryDisplay a:hover {
+  text-decoration: underline;
+}
+
 
 /* =========== 
 Footer

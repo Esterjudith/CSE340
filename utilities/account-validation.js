@@ -72,4 +72,50 @@ validate.checkRegData = async (req, res, next) => {
   next()
 }
 
+/* **********************************
+ *  Login Data Validation Rules
+ * ********************************* */
+validate.loginRules = () => {
+  return [
+    // Require valid email
+    body("account_email")
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("Please enter a valid email address.")
+      .custom(async (account_email) => {
+        const emailExists = await accountModel.getAccountByEmail(account_email)
+        if (!emailExists) {
+          throw new Error("No account found with that email address.")
+        }
+      }),
+
+    // Require non-empty password
+    body("account_password")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Please enter your password."),
+  ]
+}
+
+/* **********************************
+ *  Check login data and handle errors
+ * ********************************* */
+validate.checkLoginData = async (req, res, next) => {
+  const { account_email } = req.body
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/login", {
+      errors,
+      title: "Login",
+      nav,
+      account_email,
+    })
+    return
+  }
+  next()
+}
+
+
 module.exports = validate
