@@ -14,6 +14,7 @@ router.get("/addClassification", utilities.handleErrors(invController.buildAddCl
 router.get("/addInventory", utilities.handleErrors(invController.buildAddInventory))
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView))
+router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteInventoryView))
 
 
 router.post(
@@ -34,6 +35,8 @@ router.post("/update/",
  invValidate.inventoryRules(),
  invValidate.checkUpdateData, 
  utilities.handleErrors(invController.updateInventory))
+
+ router.post("/delete", utilities.handleErrors(invController.deleteInventory))
 
 
 //Error router

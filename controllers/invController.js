@@ -225,7 +225,7 @@ invCont.updateInventory = async function (req, res, next) {
     const classificationSelect = await utilities.buildClassificationList(classification_id)
     const itemName = `${inv_make} ${inv_model}`
     req.flash("notice", "Sorry, the insert failed.")
-    res.status(501).render("inventory/edit-inventory", {
+    res.status(501).render("inventory/editInventory", {
     title: "Edit " + itemName,
     nav,
     classificationSelect: classificationSelect,
@@ -244,5 +244,57 @@ invCont.updateInventory = async function (req, res, next) {
     })
   }
 }
+
+/* ***************************
+ *  Build delete inventory confirmation view
+ * ************************** */
+invCont.deleteInventoryView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  let nav = await utilities.getNav()
+  const itemData = await invModel.getInventoryByInventoryId(inv_id)  
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_image: itemData.inv_image,
+    inv_thumbnail: itemData.inv_thumbnail,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color,
+    classification_id: itemData.classification_id
+  })
+}
+
+/* ***************************
+ *  Delete Inventory Data
+ * ************************** */
+
+invCont.deleteInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.body.inv_id, 10)
+
+  try {  
+    const deleteResult = await invModel.deleteInventoryItem(inv_id)
+
+    if (deleteResult) {
+      req.flash("notice", "The vehicle was successfully deleted.")
+      return res.redirect("/inv/") 
+    } else {
+      req.flash("notice", "Sorry, the delete failed.")
+      return res.redirect(`/inv/delete/${inv_id}`) 
+    }
+  } catch (err) {
+    console.error("Error deleting inventory:", err.message)
+    req.flash("notice", "There was a problem processing your request.")
+    return res.redirect(`/inv/delete/${inv_id}`)
+  }
+}
+
+
 
 module.exports = invCont
