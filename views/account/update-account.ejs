@@ -1,0 +1,79 @@
+<section class="update-account">
+  <h1><%= title %></h1>
+
+  <!-- Flash or validation messages -->
+  <section class="flash-container">
+    <%- messages() %>
+    <% if (errors && errors.length > 0) { %>
+      <ul class="form-errors">
+        <% errors.forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+
+  <!-- ========== Form 1: Account Update ========== -->
+  <form action="/account/update" method="post" class="account-update-form">
+  <fieldset>
+    <legend>Account Update</legend>
+
+    <!-- hidden id -->
+    <input type="hidden" name="account_id" value="<%= account_id %>">
+
+    <!-- First name -->
+    <label for="account_firstname">First Name:</label>
+    <input
+      type="text"
+      id="account_firstname"
+      name="account_firstname"
+      required
+      value="<%= locals.account_firstname || accountData.account_firstname %>"
+    >
+
+    <!-- Last name -->
+    <label for="account_lastname">Last Name:</label>
+    <input
+      type="text"
+      id="account_lastname"
+      name="account_lastname"
+      required
+      value="<%= locals.account_lastname || accountData.account_lastname %>"
+    >
+
+    <!-- Email -->
+    <label for="account_email">Email:</label>
+    <input
+      type="email"
+      id="account_email"
+      name="account_email"
+      required
+      value="<%= locals.account_email || accountData.account_email %>"
+    >
+
+    <button type="submit">Update Account</button>
+  </fieldset>
+</form>
+
+  <!-- ========== Form 2: Change Password ========== -->
+  <form action="/account/update-password" method="post" class="password-change-form">
+  <fieldset>
+    <legend>Change Password</legend>
+
+    <!-- Hidden id -->
+    <input type="hidden" name="account_id" value="<%= account_id %>">
+
+    <label for="password">New Password</label>
+    <input type="password" id="password" name="account_password"
+      pattern="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{12,}$"
+      required
+    >
+
+    <p class="password-rules">
+      <i>Password must be at least 12 characters and contain at least 1 uppercase letter, 1 number, and 1 special character.</i>
+    </p>
+
+    <button type="submit">Change Password</button>
+  </fieldset>
+</form>
+</section>

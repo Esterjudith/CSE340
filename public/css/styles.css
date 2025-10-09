@@ -18,12 +18,13 @@ Header
 =================== */
 
 
-#top-header{  
+#top-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  
+  flex-direction: column; 
+  align-items: flex-start;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+  padding: 0.75rem 1.5rem; 
 }
 
 .siteName {
@@ -37,6 +38,31 @@ header a {
 
 .siteName a {
   font-size: 2rem;
+}
+
+#tools {
+  display: flex;
+  flex-direction: column;  
+  align-items: flex-end;
+  gap: 0.5rem; 
+  margin-top: 0.5rem;
+  }
+
+#tools a {
+  font-size: 1rem;
+  color: #0077cc;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+
+#tools a:hover {
+  color: #004d80;
+}
+
+#tools a:first-child {
+  color: #333;
+  font-weight: 500;
 }
 
 /* ==============
@@ -468,6 +494,113 @@ Inventory Management Page
   text-decoration: underline;
 }
 
+/* ====================== 
+Account Management Page
+=========================*/
+.account-management {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 1.5rem;
+}
+
+.account-management h2 {
+  color: #333;
+  margin-top: 1rem;
+}
+
+.account-management a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.account-management a:hover {
+  text-decoration: underline;
+}
+
+/* =========== 
+Update Account Page
+===============*/
+
+.update-account {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.update-account h1 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.update-account form {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.update-account fieldset {
+  border: none;
+  padding: 0;
+}
+
+.update-account legend {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.update-account label {
+  display: block;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.update-account input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.update-account button {
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.update-account button:hover {
+  background-color: #005fa3;
+}
+
+.password-rules {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.25rem;
+}
+
+.form-errors {
+  background-color: #ffeaea;
+  border: 1px solid #ffb3b3;
+  color: #b30000;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.account-management p {
+  margin: 1rem;
+}
+
 
 /* =========== 
 Footer
@@ -490,6 +623,20 @@ footer {
     margin: 0 auto;
     max-width: 900px;
   }
+  #top-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ccc;
+  }
+  #tools {   
+    flex-direction: row; 
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0;
+  }
+
   .hero-img {  
    max-width: 600px;  
   }
