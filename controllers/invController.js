@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const favModel = require("../models/favorites-model")
 const utilities = require("../utilities/")
 
 const invCont = {}
@@ -10,7 +11,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   const className = data[0].classification_name
   res.render("./inventory/classification", {
     title: className + " vehicles",
@@ -24,23 +25,35 @@ invCont.buildByClassificationId = async function (req, res, next) {
  * ************************** */
 
 invCont.buildDetailView = async function (req, res, next) {
-  const inv_id = req.params.inv_id;
+  const inv_id = parseInt(req.params.inv_id, 10)
   const data = await invModel.getInventoryByInventoryId(inv_id);
   console.log("vehicle data:", data);
   const grid = await utilities.buildDetailView(data);
-  let nav = await utilities.getNav();
+  let nav = await utilities.getNav(req, res);
   const make = data.inv_make;
   const model = data.inv_model;
   const year = data.inv_year;
+
+  let isFavorited = false
+  if (res.locals.loggedin) {
+    try {
+      isFavorited = await favModel.isFavorited(res.locals.accountData.account_id, inv_id)
+    } catch (err) {
+      console.error("Error checking favorites:", err)
+    }
+  }
+
   res.render("./inventory/detailInventory", {
     title: `${year} ${make} ${model}`,
     nav, 
     grid,
+    inv_id,
+    isFavorited
   })
 }
 
 invCont.buildManagement = async (req, res) => {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   const classificationSelect = await utilities.buildClassificationList()
   res.render("inventory/management", {
     title: "Inventory Management",
@@ -51,7 +64,7 @@ invCont.buildManagement = async (req, res) => {
 }
 
 invCont.buildAddClassification = async (req, res) => {
-  let nav = await utilities.getNav();
+  let nav = await utilities.getNav(req, res);
   res.render("inventory/addClassification", {
     title:"Add Classification",
     nav,
@@ -60,7 +73,7 @@ invCont.buildAddClassification = async (req, res) => {
 }
 
 invCont.postClassification = async (req, res) => {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   const { classification_name } = req.body
 
   try {
@@ -90,7 +103,7 @@ invCont.postClassification = async (req, res) => {
  * ************************** */
 
 invCont.buildAddInventory = async (req, res) => {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   let classificationList = await utilities.buildClassificationList()
   res.render("inventory/addInventory", {
     title: "Add Inventory",
@@ -102,7 +115,7 @@ invCont.buildAddInventory = async (req, res) => {
 }
 
 invCont.postInventory = async (req, res) => {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   let classificationList = await utilities.buildClassificationList(req.body.classification_id)
 
   try {
@@ -162,7 +175,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
  * ************************** */
 invCont.editInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id)
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   const itemData = await invModel.getInventoryByInventoryId(inv_id)
   const classificationSelect = await utilities.buildClassificationList(itemData.classification_id)
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
@@ -189,7 +202,7 @@ invCont.editInventoryView = async function (req, res, next) {
  *  Update Inventory Data
  * ************************** */
 invCont.updateInventory = async function (req, res, next) {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   const {
     inv_id,
     inv_make,
@@ -250,7 +263,7 @@ invCont.updateInventory = async function (req, res, next) {
  * ************************** */
 invCont.deleteInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id)
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   const itemData = await invModel.getInventoryByInventoryId(inv_id)  
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
   res.render("./inventory/delete-confirm", {

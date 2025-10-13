@@ -8,7 +8,7 @@ require("dotenv").config()
 *  Deliver login view
 * *************************************** */
 async function buildLogin(req, res, next) {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   res.render("account/login", {
     title: "Login",
     nav,  
@@ -19,7 +19,7 @@ async function buildLogin(req, res, next) {
 *  Deliver registration view
 * *************************************** */
 async function buildRegister(req, res, next) {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   res.render("account/register", {
     title: "Register",
     nav,
@@ -31,7 +31,7 @@ async function buildRegister(req, res, next) {
 *  Process Registration
 * *************************************** */
 async function registerAccount(req, res) {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   const { account_firstname, account_lastname, account_email, account_password }= req.body
 
   // Hash the password before storing
@@ -79,7 +79,7 @@ async function registerAccount(req, res) {
  *  Process login request
  * ************************************ */
 async function accountLogin(req, res) {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
   if (!accountData) {
@@ -132,7 +132,7 @@ async function logoutAccount(req, res) {
 }
 
 async function getAccountManagement (req, res) {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   const accountData = req.session.account
   res.render("account/accountManagement", {
     title: "Account Management",
@@ -147,7 +147,7 @@ async function getAccountManagement (req, res) {
  * ************************** */
 
 async function buildUpdateAccount(req, res) {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav(req, res)
   const account_id = parseInt(req.params.account_id)
   const accountData = req.session.account
    res.render("account/update-account", {
@@ -175,7 +175,7 @@ async function updateAccount(req, res) {
     req.flash("notice", "Sorry, the update failed. Please try again.")    
   }
 
-  const nav = await utilities.getNav()
+  const nav = await utilities.getNav(req, res)
   const accountData = await accountModel.getAccountById(account_id)
 
   res.render("account/accountManagement", {
@@ -199,7 +199,7 @@ async function updatePassword(req, res) {
       req.flash("notice", "Password update failed. Please try again.")
     }
 
-    const nav = await utilities.getNav()
+    const nav = await utilities.getNav(req, res)
     const accountData = await accountModel.getAccountById(account_id)
 
     res.render("account/accountManagement", {

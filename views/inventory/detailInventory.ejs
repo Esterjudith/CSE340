@@ -7,3 +7,13 @@
 <%# messages() %>
 
 <%- grid %>
+
+<% if (isFavorited) { %>
+  <form action="/favorites/remove/<%= inv_id %>" method="post">
+    <button type="submit" class="btn btn-danger">★ Remove from Favorites</button>
+  </form>
+<% } else { %>
+  <form action="/favorites/add/<%= inv_id %>" method="post">
+    <button type="submit" class="btn btn-primary">☆ Add to Favorites</button>
+  </form>
+<% } %>

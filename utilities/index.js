@@ -22,6 +22,9 @@ Util.getNav = async function (req, res, next) {
       "</a>"
     list += "</li>"
   })
+  if (res && res.locals && res.locals.loggedin) {
+    list += '<li><a href="/favorites" title="View your saved vehicles">My Favorites</a></li>'
+  }
   list += "</ul>"
   return list
 }
